@@ -1,13 +1,18 @@
 body {
   height: 100vh;
   margin: 0px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   display: grid;
   grid-template: 50px 1fr/ 300px 1fr;
   grid-template-areas:
     'header header'
     'sidebar content';
 }
-
+.logo {
+  font-size: 26px;
+  margin: 0px;
+  margin-left: 10px;
+}
 .sidebar {
   grid-area: sidebar;
   background-color: whitesmoke;
@@ -21,5 +26,39 @@ body {
 .header {
   grid-area: header;
   background-color: white;
-  box-shadow: 10px 10px lightblue;
+  align-self: center;
+  display: flex;
+}
+
+.logoIcon {
+  height: 30px;
+  width: 30px;
+}
+.user {
+  margin-left: 20px;
+  font-size: 18px;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+  background-color: green;
+  align-self: center;
+}
+
+.username {
+  margin-left: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0px;
+  margin-left: 20px;
+  display: grid;
+  gap: 20px;
+  font-size: 18px;
 }

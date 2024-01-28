@@ -1,2 +1,4 @@
 import './style.css';
-console.log('webpack-template');
+import generateForm from './addTask';
+
+generateForm();

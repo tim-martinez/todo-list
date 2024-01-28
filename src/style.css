@@ -20,7 +20,7 @@ body {
 
 .content {
   grid-area: content;
-  background-color: white;
+  background-color: rgb(225, 225, 225);
 }
 
 .header {
@@ -35,6 +35,7 @@ body {
   width: 30px;
 }
 .user {
+  margin-top: 20px;
   margin-left: 20px;
   font-size: 18px;
   display: flex;
@@ -42,15 +43,16 @@ body {
 }
 
 .avatar {
+  align-self: center;
+}
+.avatar img {
   height: 30px;
   width: 30px;
-  border-radius: 100%;
-  background-color: green;
-  align-self: center;
 }
 
 .username {
   margin-left: 10px;
+  font-weight: 900;
 }
 
 ul {
@@ -61,4 +63,22 @@ ul {
   display: grid;
   gap: 20px;
   font-size: 18px;
+}
+
+.nav li {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.addTaskDiv {
+  height: 400px;
+  width: 500px;
+  background-color: green;
+}
+
+.addTaskView {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

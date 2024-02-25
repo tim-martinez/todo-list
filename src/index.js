@@ -1,4 +1,6 @@
 import './style.css';
-import generateForm from './addTask';
+import * as UI from './modules/UI';
+import task from './modules/task';
 
-generateForm();
+UI.addTask();
+task();

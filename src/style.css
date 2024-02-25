@@ -3,7 +3,7 @@ body {
   margin: 0px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   display: grid;
-  grid-template: 50px 1fr/ 300px 1fr;
+  grid-template: 50px 1fr/ 250px 1fr;
   grid-template-areas:
     'header header'
     'sidebar content';
@@ -18,16 +18,35 @@ body {
   background-color: whitesmoke;
 }
 
+@media screen and (max-width: 700px) {
+  .sidebar {
+    display: none;
+  }
+
+  body {
+    grid-template: 50px 1fr/ 1fr;
+    grid-template-areas:
+      'header'
+      'content';
+  }
+}
+
 .content {
   grid-area: content;
-  background-color: rgb(225, 225, 225);
+  background-color: rgb(255, 255, 255);
 }
 
 .header {
   grid-area: header;
-  background-color: white;
-  align-self: center;
+  background-color: rgb(255, 255, 255);
   display: flex;
+  box-shadow: 0px 10px 15px -5px rgba(0, 0, 0, 0.2);
+  position: relative; /* This is necessary for z-index to work */
+  z-index: 1; /* This raises the element above the base level */
+}
+
+.header > * {
+  align-self: center;
 }
 
 .logoIcon {
@@ -71,14 +90,89 @@ ul {
   gap: 15px;
 }
 
-.addTaskDiv {
-  height: 400px;
-  width: 500px;
-  background-color: green;
-}
-
 .addTaskView {
   display: flex;
   justify-content: center;
-  align-items: center;
+}
+
+.addTaskDiv {
+  min-width: 400px;
+  width: 60%;
+  max-width: 800px;
+  height: 200px;
+  margin-top: 50px;
+  background-color: rgb(255, 255, 255);
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 1fr;
+  /* padding-top: 10px;
+  padding-bottom: 10px; */
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.addTaskDiv form {
+  display: grid;
+  grid-template: 1fr 1fr 0.5fr / 1fr 1fr 1fr 1fr;
+  column-gap: 10px;
+  /* row-gap: 5px; */
+  grid-template-areas:
+    'taskName taskName taskName taskName'
+    'description description description description'
+    'priority dueDate . submit';
+  padding: 10px;
+}
+
+.addTaskDiv form > * {
+  border: none;
+  border-radius: 10px;
+  color: rgb(79, 79, 79);
+}
+
+#taskName {
+  grid-area: taskName;
+  font-size: 26px;
+  border: none;
+}
+
+#taskName:focus {
+  outline: none;
+}
+
+#description {
+  grid-area: description;
+  border: none;
+  display: flex;
+  font-size: 20px;
+  outline: none;
+  padding-bottom: 30px;
+}
+
+#priority {
+  grid-area: priority;
+  background-color: white;
+  border: 1px solid rgb(184, 184, 184);
+  font-size: 16px;
+  color: rgb(48, 48, 48);
+  outline: none;
+}
+
+#dueDate {
+  grid-area: dueDate;
+  background-color: white;
+  border: 1px solid rgb(184, 184, 184);
+  font-size: 16px;
+  min-width: 100px;
+  outline: none;
+}
+
+#submit {
+  grid-area: submit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+#submit:hover {
+  background-color: rgb(222, 222, 222);
 }

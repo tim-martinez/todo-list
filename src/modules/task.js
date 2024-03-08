@@ -1,4 +1,6 @@
 export default function task() {
+  let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
   class Task {
     constructor(name, description, priority, dueDate) {
       this.name = name;
@@ -19,7 +21,17 @@ export default function task() {
       priority.value,
       dueDate.value
     );
+    tasks.push(task);
 
-    console.log(task);
+    //local storage
+    const storeTasks = function (key, objects) {
+      const objectsString = JSON.stringify(objects);
+      localStorage.setItem(key, objectsString);
+    };
+
+    storeTasks('tasks', tasks);
+
+    //custom event to share data with UI.js
+    document.dispatchEvent(new CustomEvent('taskAdded', { detail: { tasks } }));
   });
 }

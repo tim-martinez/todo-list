@@ -34,6 +34,10 @@ body {
 .content {
   grid-area: content;
   background-color: rgb(255, 255, 255);
+  position: relative;
+  display: grid;
+  overflow-y: auto;
+  padding: 20px;
 }
 
 .header {
@@ -88,11 +92,17 @@ ul {
   display: flex;
   align-items: center;
   gap: 15px;
+  cursor: pointer;
 }
 
-.addTaskView {
+/* .addTaskView {
   display: flex;
   justify-content: center;
+} */
+
+.allTasksView {
+  gap: 10px;
+  grid-auto-rows: 100px;
 }
 
 .addTaskDiv {
@@ -110,6 +120,13 @@ ul {
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+  position: absolute; /* Add this line */
+  z-index: 2; /* Ensure it's above other content, adjust the value as needed */
+  top: 0; /* Adjust as needed */
+  left: 0; /* Adjust to center or position as desired */
+  right: 0; /* Adjust to center or position as desired */
+  margin-left: auto; /* Center the div */
+  margin-right: auto; /* Center the div */
 }
 
 .addTaskDiv form {
@@ -176,3 +193,12 @@ ul {
 #submit:hover {
   background-color: rgb(222, 222, 222);
 }
+
+.taskMainView {
+  background-color: greenyellow;
+  /* height: 100px; */
+}
+
+/* .taskMainView:first-child {
+  margin-top: 20px;
+} */

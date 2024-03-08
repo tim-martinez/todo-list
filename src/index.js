@@ -1,6 +1,9 @@
 import './style.css';
 import * as UI from './modules/UI';
-import task from './modules/task';
 
-UI.addTask();
-task();
+document.addEventListener('DOMContentLoaded', () => {
+  UI.setupTaskListeners();
+  UI.navEventDelegation();
+  UI.setupTaskListeners();
+  UI.viewAllTasks(JSON.parse(localStorage.getItem('tasks')) || []);
+});

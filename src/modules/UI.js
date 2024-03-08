@@ -1,8 +1,10 @@
+import task from './task';
+
 export function addTask() {
   const content = document.querySelector('.content');
   const addTaskDiv = document.createElement('div');
   addTaskDiv.classList.add('addTaskDiv');
-  content.classList.add('addTaskView');
+  content.classList.add('allTasksView');
   content.append(addTaskDiv);
 
   const form = document.createElement('form');
@@ -64,4 +66,54 @@ export function addTask() {
   submit.id = 'submit';
   submit.value = 'Add Task';
   form.append(submit);
+}
+
+export function navEventDelegation() {
+  const nav = document.querySelector('.nav');
+
+  nav.addEventListener('click', (event) => {
+    const target = event.target;
+    if (target.matches('.addTask')) {
+      addTask();
+      task();
+    }
+  });
+}
+
+export function clearContent() {
+  const content = document.querySelector('.content');
+  while (content.firstChild) {
+    content.removeChild(content.firstChild);
+  }
+}
+
+export function removeAddTaskForm() {
+  const content = document.querySelector('.content');
+  const addTaskDiv = document.querySelector('.addTaskDiv');
+
+  if (addTaskDiv && content.contains(addTaskDiv)) {
+    content.removeChild(addTaskDiv);
+  }
+}
+
+//event listener for custom event
+export function setupTaskListeners() {
+  document.addEventListener('taskAdded', (event) => {
+    removeAddTaskForm();
+    viewAllTasks(event.detail.tasks);
+  });
+}
+
+export function viewAllTasks(tasks) {
+  console.log('UI: ', tasks);
+  clearContent();
+
+  // TODO Update content div with tasks
+  const content = document.querySelector('.content');
+  tasks.forEach((task) => {
+    const taskDiv = document.createElement('div');
+    taskDiv.className = 'taskMainView';
+    taskDiv.textContent = `${task.name} ${task.description} ${task.priority} ${task.dueDate}`;
+    content.append(taskDiv);
+  });
 }

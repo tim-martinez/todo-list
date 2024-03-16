@@ -8,11 +8,13 @@ body {
     'header header'
     'sidebar content';
 }
+
 .logo {
   font-size: 26px;
   margin: 0px;
   margin-left: 10px;
 }
+
 .sidebar {
   grid-area: sidebar;
   background-color: whitesmoke;
@@ -68,6 +70,7 @@ body {
 .avatar {
   align-self: center;
 }
+
 .avatar img {
   height: 30px;
   width: 30px;
@@ -95,14 +98,9 @@ ul {
   cursor: pointer;
 }
 
-/* .addTaskView {
-  display: flex;
-  justify-content: center;
-} */
-
 .allTasksView {
   gap: 10px;
-  grid-auto-rows: 100px;
+  grid-auto-rows: 30px;
 }
 
 .addTaskDiv {
@@ -195,10 +193,8 @@ ul {
 }
 
 .taskMainView {
-  background-color: greenyellow;
-  /* height: 100px; */
+  background-color: rgb(232, 232, 232);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-
-/* .taskMainView:first-child {
-  margin-top: 20px;
-} */

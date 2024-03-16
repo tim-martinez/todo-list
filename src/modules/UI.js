@@ -1,12 +1,16 @@
-import task from './task';
+import { Task, getTasks, pushTask, taskAdded } from './taskModel.js';
+import { handleCheckboxChange } from './task.js';
 
 export function addTask() {
   const content = document.querySelector('.content');
+
+  //form container
   const addTaskDiv = document.createElement('div');
   addTaskDiv.classList.add('addTaskDiv');
   content.classList.add('allTasksView');
   content.append(addTaskDiv);
 
+  //add task form
   const form = document.createElement('form');
   form.id = 'newTask';
   addTaskDiv.append(form);
@@ -68,6 +72,7 @@ export function addTask() {
   form.append(submit);
 }
 
+//sidebar event delegation
 export function navEventDelegation() {
   const nav = document.querySelector('.nav');
 
@@ -75,11 +80,12 @@ export function navEventDelegation() {
     const target = event.target;
     if (target.matches('.addTask')) {
       addTask();
-      task();
+      setupTaskListeners();
     }
   });
 }
 
+//clear all children inside content div
 export function clearContent() {
   const content = document.querySelector('.content');
   while (content.firstChild) {
@@ -87,6 +93,7 @@ export function clearContent() {
   }
 }
 
+//remove add task form
 export function removeAddTaskForm() {
   const content = document.querySelector('.content');
   const addTaskDiv = document.querySelector('.addTaskDiv');
@@ -98,22 +105,69 @@ export function removeAddTaskForm() {
 
 //event listener for custom event
 export function setupTaskListeners() {
-  document.addEventListener('taskAdded', (event) => {
-    removeAddTaskForm();
-    viewAllTasks(event.detail.tasks);
+  document.querySelector('#newTask').addEventListener('submit', (event) => {
+    event.preventDefault(); // Prevent form from submitting traditionally
+
+    // Collect form data
+    const taskName = document.querySelector('#taskName').value;
+    const description = document.querySelector('#description').value;
+    const priority = document.querySelector('#priority').value;
+    const dueDate = document.querySelector('#dueDate').value;
+
+    // Create a new task and add it to local storage
+    pushTask(new Task(taskName, description, priority, dueDate));
+
+    // Emit custom event to signal a task has been added
+    taskAdded();
+
+    // Clear form fields after submission
+    event.target.reset();
+
+    viewAllTasks();
+
+    // Optionally, you could directly call `viewAllTasks()` here to update the UI,
+    // but using a custom event as shown keeps concerns separated.
   });
 }
 
-export function viewAllTasks(tasks) {
-  console.log('UI: ', tasks);
-  clearContent();
-
-  // TODO Update content div with tasks
+export function viewAllTasks() {
+  const tasks = getTasks(); // Fetch tasks from taskModel.js
+  // clearContent();
   const content = document.querySelector('.content');
-  tasks.forEach((task) => {
+
+  tasks.forEach((task, index) => {
     const taskDiv = document.createElement('div');
     taskDiv.className = 'taskMainView';
-    taskDiv.textContent = `${task.name} ${task.description} ${task.priority} ${task.dueDate}`;
-    content.append(taskDiv);
+
+    // Task completion checkbox
+    const checkBox = document.createElement('input');
+    checkBox.type = 'checkbox';
+    checkBox.setAttribute('data-task-id', index);
+    checkBox.checked = task.completed;
+    checkBox.addEventListener('change', handleCheckboxChange);
+
+    // Name Span
+    const name = document.createElement('span');
+    name.className = 'taskName';
+    name.textContent = task.name;
+
+    // Description
+    const description = document.createElement('span');
+    description.className = 'description';
+    description.textContent = task.description;
+
+    // Priority
+    const priority = document.createElement('span');
+    priority.className = 'priority';
+    priority.textContent = task.priority;
+
+    // Due Date
+    const dueDate = document.createElement('span');
+    dueDate.className = 'dueDate';
+    dueDate.textContent = task.dueDate;
+
+    // Appending all elements to the taskDiv and then content
+    taskDiv.append(checkBox, name, description, priority, dueDate);
+    content.appendChild(taskDiv);
   });
 }

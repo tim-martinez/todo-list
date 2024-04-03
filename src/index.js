@@ -1,28 +1,39 @@
 import './style.css';
 import * as UI from './modules/UI';
-import { finder } from '@medv/finder';
-
-//css finder by https://github.com/antonmedv/finder
-document.addEventListener('click', (event) => {
-  const selector = finder(event.target);
-  console.log(selector);
-});
 
 document.addEventListener('DOMContentLoaded', () => {
-  // UI.setupTaskListeners();
-  UI.navEventDelegation();
-  // UI.setupTaskListeners();
-
   UI.viewAllTasks();
-
-  if (document.querySelector('#newTask')) {
-    UI.setupTaskListeners;
-  }
+  UI.navEventDelegation();
 });
 
-//need to fix what happens when click on add task right now nothing happens
-//because a ton of logic was changed
-//the add task button doest even store anything in local memory
-//need to modify the add task submit to also redisplay all the tasks
+//ISSUE:
+//not sure how to handle local storage issue
+//continue with other logic and revisit
+//work around fix maybe just remove the class prototype method all together
+//and move it somewhere else
 
-//still working on handling the submit task button
+//TODO:
+// x - format date using date-fns
+// x - add color for priority
+// x - organize tasks in order by date
+// x - Add feat: view all tasks due today
+// x - view all upcoming tasks
+// x - add cancel button to addtaskform
+// x - make priority color show on the left edge of task instead of background color
+// x - finish making sure the taskView size is correct min-width
+// x - add feat: remove/ delete task - x button that turns red on hover then prompt user to confirm delete
+// x - remove is working but need to fix logic for displaying upcoming tasks
+// x - finish create project and Projects view.
+
+//TODO:
+//working on form for editing task
+//need to add the task's information into the input placeholders.
+//finish creating and handle submiting the form
+
+//todo:
+//issue with edit. only works on bottom most task in viewallTasks
+// possible issue with event listeners being called incorrectly
+
+//add footer with link to github portfolio
+// add hamburger menu for side bar media query
+//add prompt to create task or projects when empty
